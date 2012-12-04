@@ -5,17 +5,17 @@ let s:mayaPyCmds=['aaf2fcp', 'about', 'addAttr', 'addDynamic', 'addExtension', '
 
 function! MayaPyHelp (keyword)
     if index(s:mayaPyCmds, a:keyword) > -1
-        let $addr='http://download.autodesk.com/global/docs/maya2012/en_us/CommandsPython/'.a:keyword.'.html'
+        let $addr='http://download.autodesk.com/global/docs/maya2012/en_us/CommandsPython/' . a:keyword . '.html'
         Open $addr
     else
         if has('unix')
-            map <buffer> K :execute "!pydoc " . expand("<cword>")<CR>
+            execute "!pydoc " . expand("<cword>")
         else
-            map <buffer> K :execute "!C:/<PythonDir>/Lib/pydoc.py " . expand("<cword>")<CR>
+            execute "!python C:/Python26/Lib/pydoc.py " . expand("<cword>")
         endif
     endif
 endfunction
 
 " Maya Python help access
-au BufReadPost *.py   map K :exe "call MayaPyHelp('".expand("<cword>")."')"<CR>
+au BufReadPost *.py   map K :exe "call MayaPyHelp('" . expand("<cword>") . "')"<CR>
 
